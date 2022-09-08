@@ -1,7 +1,11 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
 #include "TestActor.h"
+
+void ATestActor::DrawSphere(FVector Location, FColor Color)
+{
+	DrawDebugSphere(GetWorld(), Location, 100, 12, Color, true);
+}
 
 // Sets default values
 ATestActor::ATestActor()

@@ -2,6 +2,7 @@
 
 #pragma once
 
+
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "TestActor.generated.h"
@@ -11,7 +12,11 @@ class UNREALGP_API ATestActor : public AActor
 {
 	GENERATED_BODY()
 	
-public:	
+public:
+
+	UFUNCTION(BlueprintCallable, Category="GP 21")
+	void DrawSphere(FVector Location, FColor Color);
+	
 	// Sets default values for this actor's properties
 	ATestActor();
 

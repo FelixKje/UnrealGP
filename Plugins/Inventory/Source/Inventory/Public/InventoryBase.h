@@ -14,12 +14,11 @@ class INVENTORY_API UInventoryBase : public UActorComponent
 {
 	GENERATED_BODY()
 
-	FItemBase Item;
+	FItemStruct Item;
 public:
 	// Sets default values for this component's properties
 	UInventoryBase();
 
-	void ClassFunction();
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;

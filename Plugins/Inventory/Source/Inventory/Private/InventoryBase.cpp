@@ -39,3 +39,11 @@ TArray<FItemStruct>& UInventoryBase::GetItems()
 	return Items;
 }
 
+bool UInventoryBase::AddItem(const FItemStruct& NewItem)
+{
+	Items.Add(NewItem);
+	PRINT(NewItem.ItemPDA->Text.ToString())
+	OnInventoryChanged.Broadcast(NewItem);
+	return true;
+}
+

@@ -7,9 +7,12 @@
 #include "Components/ActorComponent.h"
 #include "InventoryBase.generated.h"
 
+#define PRINT(string) GEngine->AddOnScreenDebugMessage(-1, 15, FColor::Orange, string);
 
+// DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnInventoryChangedSignature);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnInventoryChangedSignature, FItemStruct, Item);
 
-UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
+UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent), Blueprintable)
 class INVENTORY_API UInventoryBase : public UActorComponent
 {
 	GENERATED_BODY()
@@ -19,6 +22,8 @@ public:
 	// Sets default values for this component's properties
 	UInventoryBase();
 
+	UPROPERTY(BlueprintAssignable)
+	FOnInventoryChangedSignature OnInventoryChanged;
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
@@ -28,8 +33,11 @@ public:
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType,
 	                           FActorComponentTickFunction* ThisTickFunction) override;
 
+	UFUNCTION(BlueprintCallable, BlueprintPure)
 	TArray<FItemStruct>& GetItems();
-	
+
+	UFUNCTION(BlueprintCallable)
+	bool AddItem(const FItemStruct& NewItem);
 private:
 	TArray<FItemStruct> Items;
 };

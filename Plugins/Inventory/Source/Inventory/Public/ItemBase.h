@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "InventoryStructs.h"
 #include "Engine/StaticMeshActor.h"
 #include "ItemBase.generated.h"
 
@@ -22,4 +23,7 @@ protected:
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+
+	UPROPERTY(BlueprintReadOnly)
+	FItemStruct Item;
 };

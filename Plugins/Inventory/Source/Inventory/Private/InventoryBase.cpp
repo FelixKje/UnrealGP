@@ -31,7 +31,10 @@ void UInventoryBase::TickComponent(float DeltaTime, ELevelTick TickType, FActorC
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	// ...
+	if (bDebug)
+	{
+		Debug();
+	}
 }
 
 TArray<FItemStruct>& UInventoryBase::GetItems()
@@ -42,8 +45,38 @@ TArray<FItemStruct>& UInventoryBase::GetItems()
 bool UInventoryBase::AddItem(const FItemStruct& NewItem)
 {
 	Items.Add(NewItem);
-	PRINT(NewItem.ItemPDA->Text.ToString())
 	OnInventoryChanged.Broadcast(NewItem);
 	return true;
+}
+
+bool UInventoryBase::RemoveItem(const FItemStruct& Item)
+{
+	for(int i = 0; i < Items.Num(); ++i)
+	{
+		const FItemStruct ItemIndex = Items[i];
+		if(ItemIndex.ItemPDA == Item.ItemPDA)
+		{
+			Items.Remove(ItemIndex);
+			return true;
+		}
+	}
+	return false;
+}
+
+FItemStruct UInventoryBase::CreateItem(const FItemStruct& Item)
+{
+	if (Item.ItemPDA)
+	{
+		return FItemStruct{Item.ItemPDA};
+	}
+	return FItemStruct{nullptr};
+}
+
+void UInventoryBase::Debug()
+{
+	for (const FItemStruct ItemIndex : GetItems())
+	{
+		PRINT(0,ItemIndex.ItemPDA->Text.ToString());
+	}
 }
 

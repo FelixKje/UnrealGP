@@ -7,7 +7,7 @@
 #include "Components/ActorComponent.h"
 #include "InventoryBase.generated.h"
 
-#define PRINT(string) GEngine->AddOnScreenDebugMessage(-1, 15, FColor::Orange, string);
+#define PRINT(Time,String) GEngine->AddOnScreenDebugMessage(-1, Time, FColor::Orange, String);
 
 // DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnInventoryChangedSignature);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnInventoryChangedSignature, FItemStruct, Item);
@@ -17,7 +17,6 @@ class INVENTORY_API UInventoryBase : public UActorComponent
 {
 	GENERATED_BODY()
 
-	FItemStruct Item;
 public:
 	// Sets default values for this component's properties
 	UInventoryBase();
@@ -38,6 +37,17 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	bool AddItem(const FItemStruct& NewItem);
+
+	bool RemoveItem(const FItemStruct& Item);
+
+	UFUNCTION(BlueprintCallable)
+	FItemStruct CreateItem(const FItemStruct& Item);
+
+	UPROPERTY(EditDefaultsOnly)
+	bool bDebug;
+	
 private:
 	TArray<FItemStruct> Items;
+
+	void Debug();
 };

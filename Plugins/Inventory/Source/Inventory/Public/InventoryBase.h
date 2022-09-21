@@ -38,6 +38,7 @@ public:
 	UFUNCTION(BlueprintCallable)
 	bool AddItem(const FItemStruct& NewItem);
 
+	UFUNCTION(BlueprintCallable)
 	bool RemoveItem(const FItemStruct& Item);
 
 	UFUNCTION(BlueprintCallable)

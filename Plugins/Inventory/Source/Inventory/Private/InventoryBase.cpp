@@ -51,14 +51,10 @@ bool UInventoryBase::AddItem(const FItemStruct& NewItem)
 
 bool UInventoryBase::RemoveItem(const FItemStruct& Item)
 {
-	for(int i = 0; i < Items.Num(); ++i)
+	if (Items.Remove(Item) > 0)
 	{
-		const FItemStruct ItemIndex = Items[i];
-		if(ItemIndex.ItemPDA == Item.ItemPDA)
-		{
-			Items.Remove(ItemIndex);
-			return true;
-		}
+		OnInventoryChanged.Broadcast(Item);
+		return true;
 	}
 	return false;
 }

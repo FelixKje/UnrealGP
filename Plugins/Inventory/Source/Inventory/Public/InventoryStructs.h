@@ -11,11 +11,12 @@ struct FItemStruct
 	{
 	}
 
-	FItemStruct(UItemPDABase* ItemPda): ItemPDA(ItemPda), Durability(100)
+	FItemStruct(UItemPDABase* ItemPda): ItemPDA(ItemPda), Durability(100), Id(FGuid::NewGuid())
 	{
+		
 	}
 
-	FItemStruct(UItemPDABase* ItemPda, float Durability) : ItemPDA(ItemPda), Durability(Durability)
+	FItemStruct(UItemPDABase* ItemPda, float Durability) : ItemPDA(ItemPda), Durability(Durability), Id(FGuid::NewGuid())
 	{
 	}
 
@@ -24,4 +25,16 @@ struct FItemStruct
 
 	UPROPERTY(BlueprintReadWrite)
 	float Durability;
+
+	FGuid Id;
+
+	bool operator ==(const FItemStruct& other) const
+	{
+		return this->Id == other.Id;
+	}
+	
+	bool operator !=(const FItemStruct& other) const
+	{
+		return this->Id != other.Id;
+	}
 };

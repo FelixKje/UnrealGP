@@ -4,6 +4,10 @@
 #include "InventoryBase.h"
 
 
+void UInventoryBase::VoidFunction()
+{
+	PRINT(10, FColor::Red, "Hello World")
+}
 
 // Sets default values for this component's properties
 UInventoryBase::UInventoryBase()

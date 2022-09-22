@@ -2,3 +2,8 @@
 
 
 #include "ItemPDABase.h"
+
+bool UItemPDABase::Use_Implementation(APawn* Pawn)
+{
+	return false;
+}

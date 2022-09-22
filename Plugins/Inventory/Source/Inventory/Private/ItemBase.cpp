@@ -18,6 +18,16 @@ void AItemBase::BeginPlay()
 	
 }
 
+void AItemBase::OnConstruction(const FTransform& Transform)
+{
+	Super::OnConstruction(Transform);
+
+	if (GetWorld()->WorldType == EWorldType::Editor)
+	{
+		Item.Id = FGuid::NewGuid();
+	}
+}
+
 // Called every frame
 void AItemBase::Tick(float DeltaTime)
 {

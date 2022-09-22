@@ -7,7 +7,7 @@
 #include "Components/ActorComponent.h"
 #include "InventoryBase.generated.h"
 
-#define PRINT(Time,String) GEngine->AddOnScreenDebugMessage(-1, Time, FColor::Orange, String);
+#define PRINT(Time, Color ,String) GEngine->AddOnScreenDebugMessage(-1, Time, Color, String);
 
 // DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnInventoryChangedSignature);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnInventoryChangedSignature, FItemStruct, Item);
@@ -44,8 +44,14 @@ public:
 	UFUNCTION(BlueprintCallable)
 	FItemStruct CreateItem(const FItemStruct& Item);
 
+	UFUNCTION(BlueprintCallable)
+	bool TransferItem(UInventoryBase* ToInventory,const FItemStruct& Item);
+
 	UPROPERTY(EditDefaultsOnly)
 	bool bDebug;
+
+	UPROPERTY(EditDefaultsOnly)
+	FLinearColor DebugColor;
 	
 private:
 	TArray<FItemStruct> Items;

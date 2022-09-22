@@ -68,11 +68,20 @@ FItemStruct UInventoryBase::CreateItem(const FItemStruct& Item)
 	return FItemStruct{nullptr};
 }
 
+bool UInventoryBase::TransferItem(UInventoryBase* ToInventory,const FItemStruct& Item)
+{
+	if (ToInventory->AddItem(Item))
+	{
+		return RemoveItem(Item);
+	}
+	return false;
+}
+
 void UInventoryBase::Debug()
 {
 	for (const FItemStruct ItemIndex : GetItems())
 	{
-		PRINT(0,ItemIndex.ItemPDA->Text.ToString());
+		PRINT(0,DebugColor.ToFColorSRGB(),ItemIndex.ItemPDA->Text.ToString());
 	}
 }
 

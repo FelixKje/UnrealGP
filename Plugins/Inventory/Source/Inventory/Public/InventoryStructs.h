@@ -38,4 +38,6 @@ struct FItemStruct
 	{
 		return this->Id != other.Id && ItemPDA;
 	}
+
+	bool IsValid() const;
 };

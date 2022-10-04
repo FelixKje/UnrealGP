@@ -4,10 +4,6 @@
 #include "InventoryBase.h"
 
 
-void UInventoryBase::VoidFunction()
-{
-	PRINT(10, FColor::Red, "Hello World")
-}
 
 // Sets default values for this component's properties
 UInventoryBase::UInventoryBase()
@@ -48,9 +44,14 @@ TArray<FItemStruct>& UInventoryBase::GetItems()
 
 bool UInventoryBase::AddItem(const FItemStruct& NewItem)
 {
-	Items.Add(NewItem);
-	OnInventoryChanged.Broadcast(NewItem);
-	return true;
+	
+	if (NewItem.IsValid())
+	{
+		Items.Add(NewItem);
+		OnInventoryChanged.Broadcast(NewItem);
+		return true;
+	}
+	return false;
 }
 
 bool UInventoryBase::RemoveItem(const FItemStruct& Item)
@@ -87,5 +88,10 @@ void UInventoryBase::Debug()
 	{
 		PRINT(0,DebugColor.ToFColorSRGB(),ItemIndex.ItemPDA->Text.ToString());
 	}
+}
+
+FString UInventoryBase::TextToPrint()
+{
+	return "Hello World";
 }
 

@@ -18,8 +18,10 @@ class UGP_21Interface : public UInterface
  */
 class INVENTORY_API IGP_21Interface
 {
-	GENERATED_IINTERFACE_BODY();
+	GENERATED_IINTERFACE_BODY()
 
-	virtual void VoidFunction();
+	virtual void PrintSomething();
+
+	virtual FString TextToPrint()=0;
 public:
 };

@@ -16,7 +16,6 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnInventoryChangedSignature, FItemS
 UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent), Blueprintable)
 class INVENTORY_API UInventoryBase : public UActorComponent, public IGP_21Interface
 {
-	
 	GENERATED_BODY()
 
 public:
@@ -60,5 +59,6 @@ private:
 
 	void Debug();
 
-	virtual void VoidFunction() override;
+	virtual FString TextToPrint() override;
+	
 };
